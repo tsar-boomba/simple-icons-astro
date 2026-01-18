@@ -11,10 +11,15 @@ const template = await fs.readFile('./src/Template.astro', 'utf8')
 
 // funciton tht fill the template with the icon SVG
 function fillTemplate(icon, color = '') {
-	return template.replace(
-		'<!-- icon -->',
-		icon.replace(/<svg(?:.|\n)*?>((?:.|\n)*)<\/svg>/gm, '$1').replace(/  /g, '\t').trim()
-	).replace('fill="<!-- color -->"', color ? `fill="#${color}"` : '')
+	return template
+		.replace(
+			'<!-- icon -->',
+			icon
+				.replace(/<svg(?:.|\n)*?>((?:.|\n)*)<\/svg>/gm, '$1')
+				.replace(/  /g, '\t')
+				.trim(),
+		)
+		.replace('<!-- color -->', color ? `#${color}` : '');
 }
 
 // copy the base layout
